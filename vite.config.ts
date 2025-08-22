@@ -11,17 +11,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Let's add a proxy to the API
-  // This is a temporary solution to get the API working
-  // We should ideally use a proper API server (example: node express server)
-  // but for now this is fine
-  server: {
-    proxy: {
-      "/api": {
-        target: process.env.VITE_EVENTS_LISTING_API_URL,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
 });
