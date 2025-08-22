@@ -1,4 +1,5 @@
 import type { EventListing } from "../types";
+import { createCorsProxyUrl } from "../lib/utils";
 
 const fetchData = async () => {
   const apiUrl = import.meta.env.VITE_EVENTS_LISTING_API_URL;
@@ -6,7 +7,11 @@ const fetchData = async () => {
   if (!apiUrl) {
     throw new Error("API URL not configured");
   }
-  const response = await fetch(apiUrl);
+  
+  // Use allorigins.win as a CORS proxy since we dont have a backend
+  const proxyUrl = createCorsProxyUrl(apiUrl);
+  
+  const response = await fetch(proxyUrl);
   if (!response.ok) {
     throw new Error("Failed to fetch events");
   }
