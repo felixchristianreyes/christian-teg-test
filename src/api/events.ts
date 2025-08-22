@@ -1,7 +1,7 @@
 import type { EventListing } from "../types";
 
 const fetchData = async () => {
-  const apiUrl = "/api/events/event-data.json";
+  const apiUrl = import.meta.env.VITE_EVENTS_LISTING_API_URL;
   console.log(apiUrl);
   if (!apiUrl) {
     throw new Error("API URL not configured");
