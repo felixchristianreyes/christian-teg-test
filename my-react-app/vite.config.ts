@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://teg-coding-challenge.s3.ap-southeast-2.amazonaws.com",
+        target: process.env.VITE_EVENTS_LISTING_API_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

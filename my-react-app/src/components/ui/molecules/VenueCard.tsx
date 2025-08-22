@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -11,11 +12,25 @@ interface VenueCardProps {
   name: string;
   capacity: number;
   location: string;
+  redirectTo: string;
 }
 
-const VenueCard = ({ name, capacity, location }: VenueCardProps) => {
+const VenueCard = ({
+  name,
+  capacity,
+  location,
+  redirectTo,
+}: VenueCardProps) => {
+  const navigate = useNavigate();
+
   return (
-    <Card className="hover:shadow-lg transition-shadow duration-200 cursor-pointer">
+    <Card
+      className="hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+      onClick={() => {
+        console.log("redirecting to", redirectTo);
+        navigate(redirectTo);
+      }}
+    >
       <CardHeader className="pb-3">
         <CardTitle className="text-lg">{name}</CardTitle>
         <CardDescription className="text-sm text-gray-600 flex items-center gap-2">

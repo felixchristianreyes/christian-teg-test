@@ -1,40 +1,29 @@
-// defining it here for the sake of simplicity
-
 import type { EventListing } from "../types";
 
-// ideally this should be in a .env file
-const EVENTS_LISTING_API_URL = "/api/events/event-data.json";
-
-const fetchEvents = async () => {
-  const response = await fetch(EVENTS_LISTING_API_URL);
+const fetchData = async () => {
+  const apiUrl = "/api/events/event-data.json";
+  console.log(apiUrl);
+  if (!apiUrl) {
+    throw new Error("API URL not configured");
+  }
+  const response = await fetch(apiUrl);
   if (!response.ok) {
     throw new Error("Failed to fetch events");
   }
 
-  //   Let's assume the API can return an empty response or no data
-  //   In that case, we will return an empty array
   const data: EventListing = await response.json();
 
   if (!data.events) {
-    return [];
+    return {
+      events: [],
+      venues: [],
+    };
   }
 
-  return data.events;
+  return {
+    events: data.events,
+    venues: data.venues,
+  };
 };
 
-const fetchVenues = async () => {
-  const response = await fetch(EVENTS_LISTING_API_URL);
-  if (!response.ok) {
-    throw new Error("Failed to fetch venues");
-  }
-
-  const data: EventListing = await response.json();
-
-  if (!data.venues) {
-    return [];
-  }
-
-  return data.venues;
-};
-
-export { fetchEvents, fetchVenues };
+export { fetchData };
