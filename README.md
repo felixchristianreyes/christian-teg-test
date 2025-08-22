@@ -13,3 +13,5 @@ npm run dev
 Tech stack used:
 
 React, Vite, TailwindCSS, React Router, ShadCN, Typescript
+
+Is hosted at: https://christian-teg-test-mo2j.vercel.app/
